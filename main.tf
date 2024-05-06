@@ -27,9 +27,6 @@ module "flux_bootstrap" {
   source            = "github.com/AnnaHurtovenko/tf-fluxcd-flux-bootstrap"
   github_repository = "${var.GITHUB_OWNER}/${var.FLUX_GITHUB_REPO}"
   private_key       = module.tls_private_key.private_key_pem
-  config_host       = module.kind_cluster.endpoint
-  config_client_key = module.kind_cluster.client_key
-  config_ca         = module.kind_cluster.ca
-  config_crt        = module.kind_cluster.crt
+  config_path       = "${path.module}/kind-config" # module.gke_cluster.kubeconfig
   github_token      = var.GITHUB_TOKEN
 }
