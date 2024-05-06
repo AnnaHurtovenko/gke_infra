@@ -6,7 +6,7 @@ terraform {
 }
 
 module "github_repository" {
-  source                   = "github.com/vit-um/tf-github-repository"
+  source                   = "github.com/AnnaHurtovenko/tf-github-repository"
   github_owner             = var.GITHUB_OWNER
   github_token             = var.GITHUB_TOKEN
   repository_name          = var.FLUX_GITHUB_REPO
@@ -15,7 +15,7 @@ module "github_repository" {
 }
 
 module "tls_private_key" {
-  source    = "github.com/vit-um/tf-hashicorp-tls-keys"
+  source    = "github.com/AnnaHurtovenko/tf-hashicorp-tls-keys"
   algorithm = "RSA"
 }
 
