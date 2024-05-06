@@ -1,3 +1,6 @@
 GOOGLE_PROJECT = "terraform-422409"
 GOOGLE_REGION  = "us-central1-c"
-GKE_NUM_NODES  = 2
+GITHUB_OWNER = "AnnaHurtovenko"
+GITHUB_TOKEN = "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"
+FLUX_GITHUB_REPO = "flux-gitops"
+FLUX_GITHUB_TARGET_PATH = "clusters"
