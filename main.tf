@@ -5,6 +5,23 @@ terraform {
   }
 }
 
+provider "kind" {
+  provider   = "docker"
+  kubeconfig = pathexpand("${path.module}/kind-config")
+}
+
+resource "kind_cluster" "this" {
+  name = "kind-cluster"
+  config = <<-EOF
+        apiVersion: kind.x-k8s.io/v1alpha4
+        kind: Cluster
+        nodes:
+        - role: control-plane
+        - role: worker
+    EOF
+}
+
+
 module "github_repository" {
   source                   = "github.com/AnnaHurtovenko/tf-github-repository"
   github_owner             = var.GITHUB_OWNER
@@ -19,9 +36,6 @@ module "tls_private_key" {
   algorithm = "RSA"
 }
 
-module "kind_cluster" {
-  source = "github.com/den-vasyliev/tf-kind-cluster?ref=cert_auth"
-}
 
 module "flux_bootstrap" {
   source            = "github.com/AnnaHurtovenko/tf-fluxcd-flux-bootstrap"
@@ -30,3 +44,4 @@ module "flux_bootstrap" {
   config_path       = "${path.module}/kind-config" # module.gke_cluster.kubeconfig
   github_token      = var.GITHUB_TOKEN
 }
+
